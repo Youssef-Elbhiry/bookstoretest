@@ -1,0 +1,179 @@
+﻿@model ShopingCartViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@* 
+<form method="post">
+    <br />
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary bg-gradient text-light ml-0 py-2">
+            <div class="row px-4">
+                <div class="col-6">
+                    <h5 class="pt-2 text-white">
+                        Shopping Cart
+                    </h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body my-4">
+            <div class="row">
+            </div>
+            <div class="row mb-3 pb-3">
+                <div class="col-md-2 offset-md-1">
+                    <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Continue Shopping</small></a>
+                </div>
+                <div class="col-md-10 offset-md-1">
+
+                    @foreach (var shopingcart in Model.shopingCartList)
+                    {
+                        <div class="row border-bottom pb-3">
+                            <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                <img src="@shopingcart.Product.ImageUrl" class="rounded" width="100%" />
+                            </div>
+                            <div class="col-12 col-lg-6 pt-md-3">
+                                <h5 class="text-uppercase text-secondary"><strong>@shopingcart.Product.Title</strong></h5>
+                                <p><small> by @shopingcart.Product.Author</small></p>
+                            </div>
+                            <div class="col-12  col-lg-5 text-center row">
+                                <div class="col-3 text-md-right pt-2 pt-md-4">
+                                    <h6 class="fw-semibold">
+                                        @shopingcart.Price
+                                        <span class="text-muted">&nbsp;x&nbsp;</span>@shopingcart.Count
+                                    </h6>
+                                </div>
+                                <div class="col-6 col-sm-4 col-lg-6 pt-2">
+                                    <div class="w-75 btn-group" role="group">
+                                        <a asp-area="Customer" asp-controller="Cart" asp-action="PlusOne" asp-route-id="@shopingcart.Id" class="btn btn-outline-primary bg-gradient py-2">
+                                            <i class="bi bi-plus-square"></i>
+                                        </a> &nbsp;
+                                        <a asp-area="Customer" asp-controller="Cart" asp-action="MinusOne" asp-route-id="@shopingcart.Id" class="btn btn-outline-primary bg-gradient py-2">
+                                            <i class="bi bi-dash-square"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="col-3 col-sm-4 col-lg-2 offset-lg-1 text-right pt-2">
+                                    <a asp-area="Customer" asp-controller="Cart" asp-action="Delete" asp-route-id="@shopingcart.Id" class="btn btn-danger bg-gradient py-2 ">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="card-footer bg-white border-0">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <ul class="list-group mb-4">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-dark fw-semibold text-uppercase"> Total (USD)</h5>
+                                <h4 class="text-dark fw-bolder">@Model.TotalPrice.ToString("C")</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 offset-md-5">
+                        <a href="#" class="btn btn-primary border-0 bg-gradient w-100 py-2">Summary</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+ *@
+
+
+<form method="post">
+    <div class="border  mt-2 card">
+        <div class="card-header bg-primary bg-gradient text-light ml-0 py-2">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="pt-2 ms-3 text-white">
+                        Shopping Cart
+                    </h5>
+                </div>
+                <div class="col-md-6 text-white ">
+                    <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn mt-1 btn-outline-light text-uppercase  btn-sm offset-7"><small>Continue Shopping</small></a>
+                </div>
+            </div>
+        </div>
+        <div class=" card-body my-2">
+            <div class="row mb-2 pb-2">
+               
+                <div class="col-md-10 offset-md-1">
+
+                    @foreach (var shopingcart in Model.shopingCartList)
+                    {
+                        <div class="row border-bottom  pt-1">
+                            <div class="d-none d-lg-block col-lg-1 text-center py-3">
+
+                                @if (shopingcart.Product.ProductImages != null && shopingcart.Product.ProductImages.Count() > 0)
+                                {
+                                    <img src="@shopingcart.Product.ProductImages.FirstOrDefault()?.ImageUrl" class="card-img-top rounded" />
+                                }
+                                else
+                                {
+                                    <img src="https://placehold.co/500x600/png" class="card-img-top rounded" />
+                                }
+                            </div>
+                            <div class="col-12 col-lg-5 pt-md-3">
+                                <h5 class=" text-secondary"><strong>@shopingcart.Product.Title</strong></h5>
+                                <p><small> by @shopingcart.Product.Author</small></p>
+                            </div>
+                            <div class="col-12  col-lg-6 text-center row">
+                                <div class="col-3 text-md-right pt-2 pt-md-4">
+                                    <h6 class="fw-semibold">
+                                        @shopingcart.Price.ToString("c")
+                                        <span class="text-muted">&nbsp;x&nbsp;</span>@shopingcart.Count
+                                    </h6>
+                                </div>
+                                <div class="col-6 col-sm-4 col-lg-6 pt-3">
+                                    <div class="w-75 btn-group" role="group">
+                                        <a asp-area="Customer" asp-controller="Cart" asp-action="PlusOne" asp-route-id="@shopingcart.Id" class="btn btn-outline-primary bg-gradient py-2">
+                                            <i class="bi bi-plus-square"></i>
+                                        </a> &nbsp;
+                                        <a asp-area="Customer" asp-controller="Cart" asp-action="MinusOne" asp-route-id="@shopingcart.Id" class="btn btn-outline-primary bg-gradient py-2">
+                                            <i class="bi bi-dash-square"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="col-3 col-sm-4 col-lg-2 offset-lg-1 text-right pt-2">
+                                    <a asp-area="Customer" asp-controller="Cart" asp-action="Delete" asp-route-id="@shopingcart.Id" class="btn btn-danger bg-gradient py-2 ">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="card-footer bg-white border-0">
+                <div class="row">
+                    <div class="col-md-4 offset-md-7">
+                        <ul class="list-group mb-3">
+                            <li class="d-flex   offset-md-5 ">
+                                <h6 class="text-dark fw-semibold text-uppercase "> Total (USD) : </h6>
+                                <h5 class="text-dark fw-bold ms-2"> @Model.orderHeader.OrderTotal.ToString("C")</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 offset-md-9 ">
+                        <a asp-action="Summary" class="btn btn-primary border-0 bg-gradient w-100 py-2">Summary</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

@@ -1,0 +1,308 @@
+﻿@page
+@using BookStore.Utilites
+@model RegisterModel
+@{
+	ViewData["Title"] = "Register";
+}
+@* 
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@
+@* 
+<div class="container d-flex justify-content-center align-items-center mt-3" style="min-height:100vh;">
+    <div class="card shadow p-4 border" style="width:500px;border-radius:15px;">
+
+        <h3 class="text-center mb-3 fw-bold">Create Account</h3>
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+            <div class=" mb-3">
+                <label asp-for="Input.Name" class="form-label fw-semibold"></label>
+                <input asp-for="Input.Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Input.Name" class="text-danger small"></span>
+            </div>
+
+            <div class=" mb-3">
+                <label asp-for="Input.Email" class="form-label fw-semibold"></label>
+                <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger small"></span>
+            </div>
+
+
+            <div class="row g-2">
+                <div class="col-6">
+                    <div class=" mb-3">
+                        <label asp-for="Input.Password" class="form-label fw-semibold"></label>
+                        <input asp-for="Input.Password" type="password" class="form-control" placeholder="********" />
+                        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label asp-for="Input.ConfirmPassword" class="form-label fw-semibold"></label>
+                        <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="********" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row g-2">
+                <div class="col-6">
+                    <div class=" mb-3">
+                        <label asp-for="Input.City" class="form-label fw-semibold"></label>
+                        <input asp-for="Input.City" class="form-control" placeholder="City" />
+                        <span asp-validation-for="Input.City" class="text-danger small"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label asp-for="Input.State" class="form-label fw-semibold"></label>
+                        <input asp-for="Input.State" class="form-control" placeholder="State" />
+                        <span asp-validation-for="Input.State" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row g-2">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label asp-for="Input.StreetAddress" class="form-label fw-semibold"></label>
+                        <input asp-for="Input.StreetAddress" class="form-control" placeholder="Street Address" />
+                        <span asp-validation-for="Input.StreetAddress" class="text-danger small"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class=" mb-3">
+                        <label asp-for="Input.PostalCode" class="form-label fw-semibold"></label>
+                        <input asp-for="Input.PostalCode" class="form-control" placeholder="Postal Code" />
+                        <span asp-validation-for="Input.PostalCode" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" mb-3">
+                <label asp-for="Input.Role" class="form-label fw-semibold"></label>
+                <select asp-for="Input.Role" asp-items="@Model.Input.Roles" class="form-select">
+                    <option disabled selected>Role</option>
+                </select>
+            </div>
+            <div class=" mb-3">
+                <select asp-for="Input.CompanyId" asp-items="@Model.Input.companies" class="form-select  ">
+                    <option disabled selected>Company</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-dark w-100 fw-bold py-2 rounded-3">Register</button>
+
+            <p class="text-center mt-3 mb-0">
+                Already have an account? <a asp-page="/Account/Login" class="fw-semibold">Login</a>
+            </p>
+
+        </form>
+
+        <section>
+            <p class="text-divider d-flex mt-2">or</p>
+
+            <h3>Use another service to register.</h3>
+       
+           
+        </section>
+    </div>
+</div>
+
+
+ *@
+<div class="col-md-6 col-md-offset-2">
+    <section>
+        @{
+            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+            {
+                <div>
+                   
+                </div>
+            }
+            else
+            {
+                <form method="post" class="form-horizontal">
+                    <div>
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            }
+        }
+    </section>
+</div>
+<div class="container my-4">
+	<div class="row d-flex align-items-center justify-content-between">
+		<div class="col-lg-5 col-md-12">
+			<h2 class="mb-4 fw-bold">Create a new account.</h2>
+
+			<form method="post">
+				<div class="mb-3">
+					<label asp-for="Input.Name" class="form-label"></label>
+					<input asp-for="Input.Name" class="form-control" />
+					<span asp-validation-for="Input.Email" class="text-danger small"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="Input.Email" class="form-label"></label>
+					<input asp-for="Input.Email" class="form-control" />
+					<span asp-validation-for="Input.Email" class="text-danger small"></span>
+
+				</div>
+
+				<div class="d-flex">
+					<div class="col-6 mb-3 me-2">
+						<label asp-for="Input.Password" class="form-label"></label>
+						<input asp-for="Input.Password" class="form-control" />
+						<span asp-validation-for="Input.Password" class="text-danger small"></span>
+					</div>
+					<div class="col-6 mb-3">
+						<label asp-for="Input.ConfirmPassword" class="form-label"></label>
+						<input asp-for="Input.ConfirmPassword" class="form-control" />
+						<span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+					</div>
+				</div>
+				<div class="d-flex ">
+					<div class="col-6 mb-3 me-2">
+						<label asp-for="Input.City" class="form-label "></label>
+						<input asp-for="Input.City" class="form-control"/>
+						<span asp-validation-for="Input.City" class="text-danger small"></span>
+					</div>
+					<div class="col-6 mb-3">
+						<label asp-for="Input.State" class="form-label "></label>
+						<input asp-for="Input.State" class="form-control"/>
+						<span asp-validation-for="Input.State" class="text-danger small"></span>
+					</div>
+				</div>
+                <div class="d-flex mb-3">
+                    <div class="col-6  me-2">
+                        <label asp-for="Input.StreetAddress" class="form-label "></label>
+                        <input asp-for="Input.StreetAddress" class="form-control"/>
+                        <span asp-validation-for="Input.StreetAddress" class="text-danger small"></span>
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="Input.PostalCode" class="form-label "></label>
+                        <input asp-for="Input.PostalCode" class="form-control"/>
+                        <span asp-validation-for="Input.PostalCode" class="text-danger small"></span>
+                    </div>
+                </div>
+                @if(User.IsInRole(SD.Role_Admin))
+                {
+
+                    <div class="mb-3 ">
+                        <select asp-for="Input.Role" asp-items="@Model.Input.Roles" class="form-select">
+                            <option disabled selected>Role</option>
+                        </select>
+                    </div>
+                    <div class=" mb-3">
+                        <select asp-for="Input.CompanyId" asp-items="@Model.Input.companies" class="form-select  ">
+                            <option disabled selected>Company</option>
+                        </select>
+                    </div>
+                }
+				<button class="btn btn-info w-100 mt-2">
+					Register
+				</button>
+                <p class="text-center mt-3 mb-0">
+                    Already have an account? <a asp-page="/Account/Login" class="fw-semibold">Login</a>
+                </p>
+			</form>
+		</div>
+
+		<div class="col-lg-7 col-md-12 text-center mt-4 mt-lg-0">
+			<img src="~/Images/logandregimage.png"
+				 style="width:120%;">
+		</div>
+
+	</div>
+</div>
+
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script>
+		$(document).ready( function(){
+			$('#Input_Role').change( function (){
+			 var selct = $('#Input_Role option:selected').text()
+			 if(selct == 'Company')
+			 {
+				  $('#Input_CompanyId').show();
+			 }
+			 else
+			 {
+				 $('#Input_CompanyId').hide()
+			 }
+			})
+			  $('#Input_CompanyId').hide()
+		})
+	</script>
+}

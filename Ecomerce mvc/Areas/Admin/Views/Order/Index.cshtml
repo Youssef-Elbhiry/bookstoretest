@@ -1,0 +1,93 @@
+﻿@{
+    if(User.IsInRole(SD.Role_Admin))
+    {
+        Layout = "/Views/Shared/_AdminLayout .cshtml";
+    }
+    else
+    {
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+}
+@{
+    var status = Context.Request.Query["status"];
+    var inprocess = "text-primary";
+    var pending = "text-primary";
+    var approved = "text-primary";
+    var completed = "text-primary";
+    var all = "text-primary";
+    switch(status)
+    {
+        case "inprocess":
+            inprocess = "bg-primary text-white active";
+            break;
+        case "pending":
+            pending = "bg-primary text-white active";
+            break;
+        case "approved":
+            approved = "bg-primary text-white active";
+            break;
+        case "completed":
+             completed = "bg-primary text-white active";
+            break;
+        default:
+            all = "bg-primary text-white active";
+            break;
+
+          
+    }
+}
+<div class="py-3 d-flex justify-content-between">
+    <h3> Order Management </h3>
+    <div class="d-flex justify-content-between mb-2 mt-2">
+
+        <ul class="list-group list-group-horizontal-sm">
+            <a class="text-decoration-none" asp-action="Index" asp-route-status="inprocess">
+            <li class="list-group-item  @inprocess">InProcess</li>
+            </a>
+
+            <a class="text-decoration-none " asp-action="Index" asp-route-status="pending">
+            <li class="list-group-item @pending">Payment Pending</li>
+            </a>
+
+            <a class="text-decoration-none " asp-action="Index" asp-route-status="approved">
+            <li class="list-group-item @approved">Approved</li>
+            </a>
+
+            <a class="text-decoration-none" asp-action="Index" asp-route-status="completed">
+            <li class="list-group-item  @completed">Completed</li>
+            </a>
+
+            <a class="text-decoration-none " asp-action="Index" asp-route-status="all">
+            <li class="list-group-item @all">all</li>
+            </a>
+        </ul>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header ">
+        <div>
+            <h6>Edit Order</h6>
+        </div>
+    </div>
+    <div class="card-body">
+
+<div class="container  ">
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+        </div>
+    </div>
+
+@section scripts{
+    <script src="~/js/Order.js"></script>
+}

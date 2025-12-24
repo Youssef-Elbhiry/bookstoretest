@@ -1,0 +1,68 @@
+﻿@model Company
+@{
+    ViewData["Title"] = "UpSert";
+}
+
+
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h2 class="text-primary mb-3">Add New Company</h2>
+        <form  method="post">
+            @if (Model.Id != 0)
+            {
+                <input asp-for="Id" hidden />
+            }
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name" class="form-label fw-semibold"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="PhoneNumber" class="form-label fw-semibold"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label asp-for="StreetAddress" class="form-label fw-semibold"></label>
+                    <input asp-for="StreetAddress" class="form-control"  />
+                    <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label asp-for="City" class="form-label fw-semibold"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label asp-for="State" class="form-label fw-semibold"></label>
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label asp-for="PostalCode" class="form-label fw-semibold"></label>
+                    <input asp-for="PostalCode" class="form-control" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+
+               @if(Model.Id == 0)
+            {
+                <button type="submit" class="btn btn-success px-4 ">Create</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success px-4 ">Update</button>
+            }
+            <a asp-action="Index" class="btn btn-secondary px-4">Back</a>
+        </form>
+    </div>
+</div>
+
+
+

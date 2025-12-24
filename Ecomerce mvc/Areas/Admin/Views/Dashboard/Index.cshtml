@@ -1,0 +1,73 @@
+﻿@using BookStore.DataAccess.Repository.IRepository
+@inject IUnitOfWork unitOfWork
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="py-3">
+    <h3>Admin area</h3>
+</div>
+
+<div class="container my-4">
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="info-box bg-primary">
+                <h5>@unitOfWork.OrderHeader.GetAll().Count() All Orders</h5>
+                <div class="icon"><i class="fas fa-shopping-bag"></i></div>
+                <a asp-asp-area="Admin" asp-controller="Order" asp-action="Index">More info</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box bg-success">
+                <h5>@unitOfWork.OrderHeader.GetAll(c=>c.OrderStatus ==SD.StatusApproved,includeprops:"").Count() Approved Orders</h5>
+                <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                <a href="#">More info</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box bg-warning">
+                <h5>@unitOfWork.ApplicationUser.GetAll().Count() User Registrations</h5>
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <a href="#">More info</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box bg-danger">
+                <h5>@unitOfWork.Product.GetAll().Count() Products</h5>
+                <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                <a href="#">More info</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <style>
+    .main-content {
+        margin-left: 250px;
+    }
+
+    .info-box {
+        color: #fff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        position: relative;
+        overflow: hidden;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .info-box .icon {
+            font-size: 2rem;
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .info-box a {
+            color: #fff;
+            text-decoration: underline;
+            font-size: 0.9rem;
+        }
+                </style>
